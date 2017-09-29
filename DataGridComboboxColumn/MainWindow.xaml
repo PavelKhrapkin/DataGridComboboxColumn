@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <DataGrid x:Name="dataGrid1"
+                  CanUserAddRows="False" 
+                  CanUserDeleteRows="False"
+                  AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=Items}" SelectionChanged="dataGrid1_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridComboBoxColumn x:Name="Days" Header="День недели" Width="200" 
+                                        SortMemberPath="Day.Id"
+                                        SelectedValueBinding="{Binding Path=Day.Name}">
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <EventSetter Event="SelectionChanged" Handler="DayChanged" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn x:Name="textColumn" Header="Описание события" Binding="{Binding Path=Text}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
